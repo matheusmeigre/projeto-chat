@@ -9,7 +9,7 @@ wss.on("connection", (ws) => {
     ws.on("error", console.error)
 
     ws.on("message", (data) => {
-        wss.clients.forEach((client) => clients.send(data.toString()))
+        wss.clients.forEach((client) => client.send(data.toString()))
     })
 
     console.log("client connected")
