@@ -12,7 +12,7 @@
 }
 
 body {
-    background: url("../images/background.png");
+    background: url("../images/background-dark.jpg");
     color: black;
 }
 
@@ -27,12 +27,13 @@ body {
 .login {
     width: 100%;
     max-width: 330px;
-    background-color:aliceblue;
+    background-color:rgb(22, 22, 22);
     border-radius: 5px;
     padding: 20px;
 }
 
 .login > h2 {
+    color: white;
     text-align: center;
     font-weight: 600;
     font-size: 1.5rem;
@@ -50,8 +51,8 @@ body {
     padding: 15px;
     font-size: 0.85rem;
     font-weight: 600;
-    background-color: rgb(228, 239, 248);
-    color: black;
+    background-color: rgb(59, 59, 59);
+    color: white;
     outline: none;
     border-radius: 5px;
 }
@@ -66,13 +67,13 @@ body {
     border-radius: 5px;
     font-size: 0.85rem;
     font-weight: 700;
-    background-color: #cecdcdbd;
+    background-color: #ebebebce;
     cursor: pointer;
     color: black;
 }
 
 .login__button:hover {
-    background-color:#d4d4d4;
+    background-color:#f1f1f1;
 }
 
 .chat {
@@ -92,7 +93,7 @@ body {
 }
 
 .chat__form {
-    background-color: #747474;
+    background-color: #474747;
     padding: 15px 20px;
     display: flex;
     align-items: center;
@@ -104,11 +105,12 @@ body {
 }
 
 .chat__input {
+    color: white;
     border: none;
     padding: 15px;
     border-radius: 8px;
     flex-grow: 1;
-    background-color:#eeecec;
+    background-color:#5e5e5e;
     outline: none;
     font-size: 1rem;
 }
@@ -116,7 +118,7 @@ body {
 .chat__button {
     border: none;
     background: none;
-    color: #979797;
+    color: #e4e1e1;
     cursor: pointer;
 }
 
@@ -135,7 +137,7 @@ body {
 }
 
 .message--self {
-    background-color: #c5c5c5;
+    background-color: #dbdbdb;
     color:black;
     border-radius: 10px 10px 0 10px;
     align-self: flex-end;
@@ -143,7 +145,7 @@ body {
 }
 
 .message--other {
-    background-color: #aaaaaa;
+    background-color: #424242;
     color:white;
     border-radius: 0 10px 10px 10px;
     align-self: flex-start;
