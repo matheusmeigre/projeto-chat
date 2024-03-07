@@ -93,7 +93,7 @@ body {
 }
 
 .chat__form {
-    background-color: #474747;
+    background-color: #292929dc;
     padding: 15px 20px;
     display: flex;
     align-items: center;
@@ -110,7 +110,7 @@ body {
     padding: 15px;
     border-radius: 8px;
     flex-grow: 1;
-    background-color:#5e5e5e;
+    background-color:#2e2e2e;
     outline: none;
     font-size: 1rem;
 }
