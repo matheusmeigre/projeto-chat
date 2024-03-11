@@ -103,5 +103,62 @@ const sendMessage = (event) => {
     chatInput.value = ""
 }
 
+let mediaRecorder;
+let isRecording = false;
+let audioBlob;
+
+function startRecording() {
+    navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(function(stream) {
+        const audioChunks = [];
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.addEventListener("dataavailable", function(event) {
+            audioChunks.push(event.data);
+        });
+
+        mediaRecorder.addEventListener("stop", function() {
+            audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+            const audioUrl = URL.createObjectURL(audioBlob);
+            const audio = document.createElement('audio');
+            audio.controls = true;
+            audio.src = audioUrl;
+            document.getElementById("chat").appendChild(audio);
+            isRecording = false;
+            document.getElementById("recordButton").innerText = "Iniciar Gravação";
+        });
+
+        mediaRecorder.start();
+        isRecording = true;
+        document.getElementById("recordButton").innerText = "Parar Gravação";
+    });
+}
+
+function stopRecordingAndSend() {
+    if (isRecording) {
+        mediaRecorder.stop();
+        isRecording = false;
+        document.getElementById("recordButton").innerText = "Iniciar Gravação";
+        // Enviar o áudio capturado para o chat
+        if (audioBlob) {
+            const audio = document.createElement('audio');
+            audio.controls = true;
+            audio.src = URL.createObjectURL(audioBlob);
+            document.getElementById("chat").appendChild(audio);
+        }
+    }
+}
+
+function toggleRecording() {
+    if (isRecording) {
+        stopRecordingAndSend();
+    } else {
+        startRecording();
+    }
+}
+
+document.getElementById("recordButton").addEventListener("click", toggleRecording);
+
+
 loginForm.addEventListener("submit", handleLogin)
 chatForm.addEventListener("submit", sendMessage)

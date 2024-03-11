@@ -126,6 +126,17 @@ body {
     font-size: 1.8rem;
 }
 
+#recordButton {
+    border: none;
+    background: none;
+    color: #e4e1e1;
+    cursor: pointer;
+}
+
+#recordButton > span {
+    font-size: 1.8rem;
+}
+
 .chat__messages > div {
     padding: 10px;
     width: 100%;
