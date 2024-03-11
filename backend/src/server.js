@@ -19,23 +19,6 @@ websocket.onmessage = function(event) {
       document.body.appendChild(audioElement);
     }
   };
-  
-  // Exemplo de como enviar um arquivo de áudio para o servidor
-  function sendAudioFileToServer(file) {
-    const reader = new FileReader();
-  
-    reader.onload = function() {
-      const audioData = reader.result;
-  
-      const message = {
-        audio: audioData
-      };
-  
-      websocket.send(JSON.stringify(message));
-    };
-  
-    reader.readAsBinaryString(file);
-  }
 
 wss.on('connection', function connection(ws) {
     ws.on('message', function incoming(message) {

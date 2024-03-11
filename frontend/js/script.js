@@ -122,6 +122,24 @@ const sendMessage = (event) => {
     chatInput.value = "";
 };
 
+  
+  // Exemplo de como enviar um arquivo de áudio para o servidor
+  function sendAudioFileToServer(file) {
+    const reader = new FileReader();
+  
+    reader.onload = function() {
+      const audioData = reader.result;
+  
+      const message = {
+        audio: audioData
+      };
+  
+      websocket.send(JSON.stringify(message));
+    };
+  
+    reader.readAsBinaryString(file);
+  }
+
 let mediaRecorder;
 let isRecording = false;
 let audioBlob;
@@ -171,6 +189,7 @@ function stopRecordingAndSend() {
 function toggleRecording() {
     if (isRecording) {
         stopRecordingAndSend();
+        sendAudioFileToServer()
     } else {
         startRecording();
     }
