@@ -91,17 +91,36 @@ const handleLogin = (event) => {
 const sendMessage = (event) => {
     event.preventDefault()
 
-    const message = {
-        userId: user.id,
-        userName: user.name,
-        userColor: user.color,
-        content: chatInput.value
+    let messageContent = chatInput.value;
+
+    if (audioBlob) {
+        // Se houver um áudio capturado, envie-o junto com a mensagem de texto
+        const audioMessage = {
+            userId: user.id,
+            userName: user.name,
+            userColor: user.color,
+            content: messageContent,
+            audio: audioBlob
+        };
+
+        websocket.send(JSON.stringify(audioMessage));
+
+        // Limpa o áudioBlob após enviar
+        audioBlob = null;
+    } else {
+        // Se não houver áudio, envie apenas a mensagem de texto
+        const textMessage = {
+            userId: user.id,
+            userName: user.name,
+            userColor: user.color,
+            content: messageContent
+        };
+
+        websocket.send(JSON.stringify(textMessage));
     }
 
-    websocket.send(JSON.stringify(message))
-
-    chatInput.value = ""
-}
+    chatInput.value = "";
+};
 
 let mediaRecorder;
 let isRecording = false;
