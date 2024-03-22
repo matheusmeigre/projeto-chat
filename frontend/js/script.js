@@ -85,42 +85,47 @@ const handleLogin = (event) => {
     login.style.display = "none"
     chat.style.display = "flex"
 
-    websocket = new WebSocket("ws://chat-frontend-jwvq.onrender.com")
+    websocket = new WebSocket("wss://chat-frontend-jwvq.onrender.com")
     websocket.onmessage = proccessMessage
 }
 
 const sendMessage = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    let messageContent = chatInput.value;
+    // Verificar se o WebSocket está aberto antes de enviar a mensagem
+    if (websocket.readyState === WebSocket.OPEN) {
+        let messageContent = chatInput.value;
 
-    if (audioBlob) {
-        // Se houver um áudio capturado, envie-o junto com a mensagem de texto
-        const audioMessage = {
-            userId: user.id,
-            userName: user.name,
-            userColor: user.color,
-            content: messageContent,
-            audio: audioBlob
-        };
+        if (audioBlob) {
+            // Se houver um áudio capturado, envie-o junto com a mensagem de texto
+            const audioMessage = {
+                userId: user.id,
+                userName: user.name,
+                userColor: user.color,
+                content: messageContent,
+                audio: audioBlob
+            };
 
-        websocket.send(JSON.stringify(audioMessage));
+            websocket.send(JSON.stringify(audioMessage));
 
-        // Limpa o áudioBlob após enviar
-        audioBlob = null;
+            // Limpa o áudioBlob após enviar
+            audioBlob = null;
+        } else {
+            // Se não houver áudio, envie apenas a mensagem de texto
+            const textMessage = {
+                userId: user.id,
+                userName: user.name,
+                userColor: user.color,
+                content: messageContent
+            };
+
+            websocket.send(JSON.stringify(textMessage));
+        }
+
+        chatInput.value = "";
     } else {
-        // Se não houver áudio, envie apenas a mensagem de texto
-        const textMessage = {
-            userId: user.id,
-            userName: user.name,
-            userColor: user.color,
-            content: messageContent
-        };
-
-        websocket.send(JSON.stringify(textMessage));
+        console.error("WebSocket is not open.");
     }
-
-    chatInput.value = "";
 };
 
   
