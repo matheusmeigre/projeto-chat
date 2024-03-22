@@ -6,7 +6,7 @@ dotenv.config()
 
 const wss = new WebSocketServer({ port: process.env.PORT || 8080 })
 
-ws.onmessage = function(event) {
+wss.onmessage = function(event) {
     const data = JSON.parse(event.data);
   
     // Verificar se a mensagem contém o nome do arquivo de áudio
