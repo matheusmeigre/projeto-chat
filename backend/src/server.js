@@ -11,7 +11,7 @@ wss.onmessage = function(event) {
   
     // Verificar se a mensagem contém o nome do arquivo de áudio
     if (data.audioFileName) {
-      const audioUrl = `wss://chat-backend-pmzy.onrender.com${data.audioFileName}`;
+      const audioUrl = `wss://chat-frontend-jwvq.onrender.com${data.audioFileName}`;
   
       // Criar um elemento de áudio e reproduzir o áudio
       const audioElement = new Audio(audioUrl);
